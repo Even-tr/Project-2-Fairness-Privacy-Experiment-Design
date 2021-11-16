@@ -22,6 +22,7 @@ class Policy:
         print("Initialising policy with ", n_actions, "actions")
         print("A = {", action_set, "}")
     ## Observe the features, treatments and outcomes of one or more individuals
+    
     def observe(self, features, action, outcomes):
         """Observe features, actions and outcomes.
 
@@ -43,6 +44,7 @@ class Policy:
             self.model.fit(data)
 
         """
+
         pass
     def get_utility(self, features, action, outcome):
         """ Obtain the empirical utility of the policy on a set of one or more people. 

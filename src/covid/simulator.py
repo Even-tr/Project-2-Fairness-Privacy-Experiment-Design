@@ -58,7 +58,7 @@ class Person:
             vaccinated = True
         else:
             vaccinated = False
-            vaccine = -1  # Fixed this mistake
+            #vaccine = -1  # Fixed this mistake
             
         if (vaccinated):
             vaccine = np.argmax(vaccine_array)
