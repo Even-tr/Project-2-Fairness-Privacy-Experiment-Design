@@ -1,0 +1,22 @@
+# 2 a
+
+One sensitive variable with regards to fairness is gender, because we dont want to discriminate people based on their gender. Another sensitive variable is salary, beacuse we dont want to give people a treatment or vaccine based on their salary.
+
+To reduce our bias in our data, we must collect data that represents the whole population, and our data collection should not be based on belives we already have. For example if we want to test if a vaccine increases the probabilty of a symptom given a comorbiditie, we should not only collect data from people with the comobordotie, but also from people without that comorbidite, such that our data reflects our entire population. Also, it is important to collect data with variables that is important for our outcome. For example it could be important to use the location of where people live to predict if a person gets infected with Covid-19.
+
+To check if we have any  bias in our data we must analyze the data with for example histograms, and see if that it is representative of our populations. Also for example bootstrap mean age of population and see if it varies.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
