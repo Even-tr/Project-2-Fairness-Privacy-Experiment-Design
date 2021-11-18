@@ -11,9 +11,19 @@ n_treatments = 4
 n_population = 10000
 
 # symptom names for easy reference
-from covid.auxilliary import symptom_names
-
-
+## Symptom list: Covid-Recovered, Covid-Positive, Taste, Fever, Headache, Pneumonia, Stomach, Myocarditis, Blood-Clots, Death
+symptom_names = {
+    'Covid-Recovered': 0,
+    'Covid-Positive': 1,
+    'Taste': 2,
+    'Fever': 3,
+    'Headache': 4,
+    'Pneumonia': 5,
+    'Stomach': 6,
+    'Myocarditis': 7,
+    'Blood-Clots': 8,
+    'Death': 9}
+    
 # Create the underlying population
 print("Generating population")
 population = simulator.Population(n_genes, n_vaccines, n_treatments)
@@ -32,6 +42,7 @@ print("With a for loop")
 # The simplest way to work is to go through every individual in the population
 for t in range(n_population):
     a_t = vaccine_policy.get_action(X[t])
+    print(a_t)
     # Then you can obtain results for everybody
     y_t = population.vaccinate([t], a_t)
     # Feed the results back in your policy. This allows you to fit the

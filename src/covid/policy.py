@@ -122,7 +122,7 @@ class RandomPolicy(Policy):
         for t in range(features.shape[0]):
             action = np.random.choice(self.action_set)
             if (action >= 0):
-                actions[t,action] = 1
+                actions[t,action] = -1
             
         return actions
 
