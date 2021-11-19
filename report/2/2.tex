@@ -1,0 +1,57 @@
+
+\section*{Fair Policies (Deadline 2: 19 November)}
+\begin{itemize}
+    \item \textcolor{blue}{Choose one concept of fairness, e.g. balance of decisions with respect to gender.}
+    \begin{itemize}
+        \item We originally chose the fairness criterion equality of opportunity defined as 
+        \begin{align*}
+            \text{Equality of opportunity} = \text{min} \left( \frac{P(\hat{y} = 1 | z = 1, y = 1)}{P(\hat{y} = 1 | z=0, y=1)} , \frac{P(\hat{y} = 1 | z = 0, y = 1)}{P(\hat{y} = 1 | z=1, y=1)}\right)
+        \end{align*}
+        However, we got feedback suggusting this is not a good measure of fairness in this case, since it does not account for the action. 
+        We insted were encuraged to use a criteria on the form $P(a|x,?) = P(a|x)$. 
+        We would like to get some feedback on what $?$ should be. Is '?' f.ex the sensitive variables?
+    \end{itemize}
+    \item \textcolor{blue}{How can you measure whether your policy is fair?}
+    \begin{itemize}
+        \item Given that $P(a|x,z=1) = P(a|x,z=0)$ is a good criteria, we will calcuate this probablity for all the sensitive variables. If we get values close to 1 we will say that our policy is fair. We would also like to have a treshold where values above the thresold are acceptible.
+    \end{itemize}
+    \item \textcolor{blue}{How does the original training data affect the fairness of your policy?}
+    \begin{itemize}
+        \item In the simulator, when data is generated, the people are vaccinated. To measure fainess in the original training data we will then see how vaccines are distributed among the senistive variables. 
+    \end{itemize}
+    \item \textcolor{blue}{To help you in this part of the project, here is a list of guiding questions.}
+    \item \textcolor{blue}{(P1)}
+        \begin{itemize}
+            \item \textcolor{blue}{Identify sensitive variables.}
+            \begin{itemize}
+                \item One sensitive variable with regards to fairness is gender, because we dont want to discriminate people based on their gender. Another sensitive variable is salary, beacuse we dont want to give people a treatment or vaccine based on their salary. For a variable to be considered sensitive we must belive that the variable should not be taken into account by the policy when it chooses an action. 
+            \end{itemize}
+            \item \textcolor{blue}{Do the original features already imply some bias in data collection?}
+            \begin{itemize}
+                \item To reduce our bias in our data, we must collect data that represents the whole population, and our data collection should not be based on belives we already have. For example if we want to test if a vaccine increases the probabilty of a symptom given a comorbiditie, we should not only collect data from people with the comobordotie, but also from people without that comorbidite, such that our data reflects our entire population. Also, it is important to collect data with variables that is important for our outcome. For example it could be important to use the location of where people live to predict if a person gets infected with Covid-19. A final convern is the the variables must be logical. For instance, having a variables 'number of male children' does not make sense. It would make more sense to inlude the number of children instead. 
+            \end{itemize}
+        \end{itemize}
+    \item \textcolor{blue}{(P2)}
+        \begin{itemize}
+            \item \textcolor{blue}{Analyse the data or your decision function with simple statistics such as histograms.}
+            \begin{itemize}
+                \item We have plotted histograms of some of the variables.
+                The age histogram is unrealisitc. For on thing, the birth rate drops exponentially in recent years. Moreover, after the age of around 25 there is an exponentiall decrease in the survival rate. We see that the age of our data is centered between 20-50 years old, which can be a realistic assumption. One problem os however that there is not that much young people, and we also have some very old people (200 years old) which is not realsitic. We also see that our data is balanced in respect to the genders. When it comes to the income of our data, this also looks to reflect a general population. The distribution look like a pareto distribution. We would have expected the histogram to peak the minimum wage and not at 0. 
+                \item We also bootsrap our data to see if there is big variation, but it doesnt look to be any big variation in the data.
+            \end{itemize}
+        \end{itemize}
+    \item \textcolor{blue}{(P3)}
+        \begin{itemize}
+            \item \textcolor{blue}{For balance (or calibration), measure the total variation of the action (or outcome) distribution for different outcomes (or actions) when the sensitive variable varies.}
+            \begin{itemize}
+                \item TODO.
+            \end{itemize}
+        \end{itemize}
+    \item \textcolor{blue}{(P4)}
+        \begin{itemize}
+            \item \textcolor{blue}{Advanced: Using stochastic gradient descent, find a policy that balances out fairness and utility.}
+            \begin{itemize}
+                \item TODO.
+            \end{itemize}
+        \end{itemize}
+\end{itemize}
