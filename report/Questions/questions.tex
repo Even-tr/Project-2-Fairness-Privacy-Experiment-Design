@@ -1,0 +1,39 @@
+
+\documentclass[a4paper, 12pt]{extarticle}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{bm}
+\usepackage{color}
+\usepackage{graphicx}
+\usepackage{comment}
+\usepackage{tikz} 
+\usepackage{verbatim}
+%\usepackage[a4paper,
+%            bindingoffset=0.2in,
+%            left=0.5in,
+%            right=1in,
+%            top=1in,
+%            bottom=0.5in,
+%            footskip=.25in]{geometry}
+
+\title{IN-STK5000 Project 2 - Project 5}
+\author{Anders Bredesen Hatlelid \\
+        Jacob Nicolai Arthur Sjødin \\
+        \and
+        Even Tronstad \\
+        Torgeir Ladstein Waagbø 
+}
+
+\date{\today}
+\begin{document}
+\maketitle
+\section*{Questions}
+\item We have chosen vaccines, and our policy is just to maximise utility. 
+The rewards are individual negative constant for each symptom, where we way critical more (less since negative). 
+The the utility is the sum of all the constants. The expected utility is then the sum of the product of the rewards and the expectation for each symptoms. 
+Our model is beta-Bernoulli bandits. Each action and symptom together make up a bandit. With 10 symptoms and 3 vaccines, we get 40 bandits. 
+When individual 100 comes in for vaccines, we give this person a vaccine based on the response symptoms from the first 99 people. 
+The problem with this setup is that it does not take into action the features of the individual, we only give a vaccine based on the symptoms registered from the earlier patients. 
+This makes it hard 
+\end{document}

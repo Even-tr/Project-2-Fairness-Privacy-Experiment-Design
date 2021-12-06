@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2021) (preloaded format=pdflatex 2021.10.2)  19 NOV 2021 16:14
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2021) (preloaded format=pdflatex 2021.10.2)  6 DEC 2021 10:04
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -333,7 +333,7 @@ Package: verbatim 2020-07-07 v1.5u LaTeX2e package for verbatim enhancements
 File: l3backend-pdftex.def 2021-03-18 L3 backend support: PDF output (pdfTeX)
 \l__color_backend_stack_int=\count286
 \l__pdf_internal_box=\box60
-) (/Users/andersbredesenhatlelid/repos/Project-2-Fairness-Privacy-Experiment-Design/report/main.aux (/Users/andersbredesenhatlelid/repos/Project-2-Fairness-Privacy-Experiment-Design/report/2/2.aux))
+) (/Users/andersbredesenhatlelid/repos/Project-2-Fairness-Privacy-Experiment-Design/report/main.aux (/Users/andersbredesenhatlelid/repos/Project-2-Fairness-Privacy-Experiment-Design/report/0/0.aux) (/Users/andersbredesenhatlelid/repos/Project-2-Fairness-Privacy-Experiment-Design/report/1/1.aux) (/Users/andersbredesenhatlelid/repos/Project-2-Fairness-Privacy-Experiment-Design/report/2/2.aux) (/Users/andersbredesenhatlelid/repos/Project-2-Fairness-Privacy-Experiment-Design/report/3/3.aux))
 \openout1 = `main.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 29.
@@ -379,29 +379,50 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 ) [1
 
 {/usr/local/texlive/2021/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
+\openout2 = `0/0.aux'.
+
+ (/Users/andersbredesenhatlelid/repos/Project-2-Fairness-Privacy-Experiment-Design/report/0/0.tex) [2
+
+]
+\openout2 = `1/1.aux'.
+
+ (/Users/andersbredesenhatlelid/repos/Project-2-Fairness-Privacy-Experiment-Design/report/1/1.tex) [3
+
+
+
+] [4]
 \openout2 = `2/2.aux'.
 
  (/Users/andersbredesenhatlelid/repos/Project-2-Fairness-Privacy-Experiment-Design/report/2/2.tex
-Overfull \hbox (72.8356pt too wide) detected at line 9
+Overfull \hbox (72.8356pt too wide) detected at line 20
 []
  []
 
-[2
+[5
 
-] [3]) [4] (/Users/andersbredesenhatlelid/repos/Project-2-Fairness-Privacy-Experiment-Design/report/main.aux (/Users/andersbredesenhatlelid/repos/Project-2-Fairness-Privacy-Experiment-Design/report/2/2.aux)) ) 
+
+
+] [6]) [7]
+\openout2 = `3/3.aux'.
+
+ (/Users/andersbredesenhatlelid/repos/Project-2-Fairness-Privacy-Experiment-Design/report/3/3.tex) [8
+
+
+
+] (/Users/andersbredesenhatlelid/repos/Project-2-Fairness-Privacy-Experiment-Design/report/main.aux (/Users/andersbredesenhatlelid/repos/Project-2-Fairness-Privacy-Experiment-Design/report/0/0.aux) (/Users/andersbredesenhatlelid/repos/Project-2-Fairness-Privacy-Experiment-Design/report/1/1.aux) (/Users/andersbredesenhatlelid/repos/Project-2-Fairness-Privacy-Experiment-Design/report/2/2.aux) (/Users/andersbredesenhatlelid/repos/Project-2-Fairness-Privacy-Experiment-Design/report/3/3.aux)) ) 
 Here is how much of TeX's memory you used:
- 12887 strings out of 478994
- 258581 string characters out of 5858184
- 523335 words of memory out of 5000000
- 30117 multiletter control sequences out of 15000+600000
+ 12923 strings out of 478994
+ 260630 string characters out of 5858184
+ 525103 words of memory out of 5000000
+ 30126 multiletter control sequences out of 15000+600000
  417446 words of font info for 78 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 87i,11n,89p,1023b,296s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/local/texlive/2021/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}</usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb>
-Output written on /Users/andersbredesenhatlelid/repos/Project-2-Fairness-Privacy-Experiment-Design/report/main.pdf (4 pages, 77293 bytes).
+ 87i,11n,89p,1016b,300s stack positions out of 5000i,500n,10000p,200000b,80000s
+{/usr/local/texlive/2021/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}</usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb>
+Output written on /Users/andersbredesenhatlelid/repos/Project-2-Fairness-Privacy-Experiment-Design/report/main.pdf (8 pages, 112350 bytes).
 PDF statistics:
- 49 PDF objects out of 1000 (max. 8388607)
- 35 compressed objects within 1 object stream
+ 79 PDF objects out of 1000 (max. 8388607)
+ 57 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  13 words of extra memory for PDF output out of 10000 (max. 10000000)
 
