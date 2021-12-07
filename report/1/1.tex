@@ -3,6 +3,7 @@
 \begin{itemize}
     \item \textcolor{blue}{Does the existence of this database raise any privacy concerns?}
         \begin{itemize}
+            \item What are som particularily sentitive variables, f.ex genes?
             \item The existence of the database does indeed raise privacy concerns. 
             In particular, a persons genome might be used to identify individuals. 
             \begin{itemize}
@@ -18,23 +19,26 @@
             \item Might be possible to identify individual from the summary statistics. 
             \item TODO: discuss the points Anonymity, Secrecy, side-information and Utility on page 76 in the notes. 
             \item From brainstorming: Outliers like high age? Perhaps state the most most critical features. 
+            \item How I interpret the question: We assume an adverasry to have perfect knowledge and unlimited computer power. 
+            We then need to ensure than he cannot identify the individual that participate in the study. 
         \end{itemize}
     \item \textcolor{blue}{(a)}
         \begin{itemize}
             \item \textcolor{blue}{Explain how you would protect the data of the people in the training set.}
                 \begin{itemize}
-                    \item TODO. 
+                    \item Need a general discussion about how to make a database private.  
                 \end{itemize}
             \item \textcolor{blue}{In particular, given that your policy and model are obtained from some 'training' data set, how would you guarantee that release, or use, of the policy and model does not leak private information about the individuals?}
                 \begin{itemize}
-                    \item 
+                    \item Here we need to discuss how to to make the desition and model private. 
+                    Not sure if the individual reponses to the vaccines need to be private. 
                 \end{itemize}
         \end{itemize}
     \item \textcolor{blue}{(b)}
         \begin{itemize}
             \item \textcolor{blue}{Explain how would protect the data of the people that obtain treatment.}
                 \begin{itemize}
-                    \item 
+                    \item Is this with regard to just the storage of the data in the database?
                 \end{itemize}
             \item \textcolor{blue}{When you apply the policy or model to decide what treatment to give, this decision can be assumed to be publicly available.}
                 \begin{itemize}
@@ -42,7 +46,8 @@
                 \end{itemize}
             \item \textcolor{blue}{How would you then ensure that the private information of the treated individual is not leaked?}
                 \begin{itemize}
-                    \item 
+                    \item Here it is the case that we need to answer how to prevent the identification of the individual based on the information that is public. 
+                    The public information we release is vaccine desi
                 \end{itemize}
         \end{itemize}
     \item \textcolor{blue}{(c)}
