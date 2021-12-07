@@ -6,7 +6,20 @@
 ## outcomes: symptoms (including covid-positive)
 
 import numpy as np
-from covid.auxilliary import symptom_names
+#from auxilliary import symptom_names
+
+symptom_names = {
+    'Covid-Recovered': 0,
+    'Covid-Positive': 1,
+    'Taste': 2,
+    'Fever': 3,
+    'Headache': 4,
+    'Pneumonia': 5,
+    'Stomach': 6,
+    'Myocarditis': 7,
+    'Blood-Clots': 8,
+    'Death': 9}
+
 
 class Policy:
     """ A policy for treatment/vaccination. """
@@ -22,7 +35,6 @@ class Policy:
         print("Initialising policy with ", n_actions, "actions")
         print("A = {", action_set, "}")
     ## Observe the features, treatments and outcomes of one or more individuals
-    
     def observe(self, features, action, outcomes):
         """Observe features, actions and outcomes.
 
@@ -44,7 +56,6 @@ class Policy:
             self.model.fit(data)
 
         """
-
         pass
     def get_utility(self, features, action, outcome):
         """ Obtain the empirical utility of the policy on a set of one or more people. 
@@ -122,7 +133,7 @@ class RandomPolicy(Policy):
         for t in range(features.shape[0]):
             action = np.random.choice(self.action_set)
             if (action >= 0):
-                actions[t,action] = -1
+                actions[t,action] = 1
             
         return actions
 

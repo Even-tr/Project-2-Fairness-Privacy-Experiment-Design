@@ -9,7 +9,7 @@ import pickle
 class Person:
     def __init__(self, pop):
         self.genes = np.random.choice(2, size=pop.n_genes)
-        self.gender = np.random.choice(2,1)
+        self.gender = np.random.choice(2)
         self.age = np.random.gamma(3,11)
         self.age_adj = self.age/100 # age affects everything
         self.income = np.random.gamma(1,10000)
@@ -31,8 +31,8 @@ class Person:
 
         self.symptom_baseline = np.array([pop.historical_prevalence, pop.prevalence, 0.01, 0.05, 0.05, 0.01, 0.02, 0.001, 0.001, 0.001]);
         self.symptom_baseline = np.array(np.matrix(self.genes) * pop.G).flatten() * self.symptom_baseline
-        self.symptom_baseline[0] = pop.historical_prevalence
-        self.symptom_baseline[1] = pop.prevalence
+        self.symptom_baseline[0] = pop.historical_prevalence;
+        self.symptom_baseline[1] = pop.prevalence;
         if (self.gender==1):
             self.symptom_baseline[8] += 0.01
         else:
@@ -56,16 +56,14 @@ class Person:
         ## Vaccinated
         if (sum(vaccine_array) >=0 ):
             vaccinated = True
-            pop.NUMBEROFVACCINATED += 1
-            print('TOTAL VACCINATED:', pop.NUMBEROFVACCINATED)
         else:
             vaccinated = False
-            vaccine = -1  # Fixed this mistake
             
         if (vaccinated):
             vaccine = np.argmax(vaccine_array)
             self.vaccines = vaccine_array
             self.symptom_baseline[1] *= pop.baseline_efficacy[vaccine]
+
 
         if (vaccinated and self.symptoms[1]==1):
             self.symptom_baseline[[2,3,4,6]] *= pop.mild_efficacy[vaccine]
@@ -76,23 +74,21 @@ class Person:
             self.symptom_baseline*=0.5
 
         # baseline symptoms of non-covid patients
-        if (self.symptoms[0]==0 and self.symptoms[1]==0 and vaccine != -1):
-            self.symptom_baseline = np.array([0, 0, 0.001, 0.01, 0.02, 0.002, 0.005, 0.001, 0.002, 0.0001])
+        if (self.symptoms[0]==0 and self.symptoms[1]==0):
+            self.symptom_baseline = np.array([0, 0, 0.001, 0.01, 0.02, 0.002, 0.005, 0.001, 0.002, 0.0001]);
             ## Common side-effects
             if (vaccine==1):
                 self.symptom_baseline[8]+=0.01
                 self.symptom_baseline[9]+=0.001
             if (vaccine==2):
                 self.symptom_baseline[7]+=0.01
-            
-            #All vaccines gets this effect
             if (vaccine>=0):
                 self.symptom_baseline[3]+=0.2
                 self.symptom_baseline[4]+=0.1
 
         # model long covid sufferers by increasing the chances of various symptoms slightly
         if (self.symptoms[0]==1 and self.symptoms[1]==0):
-            self.symptom_baseline += np.array([0, 0, 0.06, 0.04, 0.01, 0.04, 0.004, 0.01, 0.04, 0.01])
+            self.symptom_baseline += np.array([0, 0, 0.06, 0.04, 0.01, 0.04, 0.004, 0.01, 0.04, 0.01]);
 
         # genetic factors
         self.symptom_baseline = np.array(np.matrix(self.genes) * pop.G).flatten() * self.symptom_baseline
@@ -101,12 +97,10 @@ class Person:
             if (np.random.uniform() < self.symptom_baseline[s]):
                 self.symptoms[s] = 1
 
-# =======================================================================================
-
 class Population:
     def __init__(self, n_genes, n_vaccines, n_treatments):
         self.n_genes = n_genes
-        self.n_comorbidities = 6
+        self.n_comorbidities = 6;
         self.n_symptoms = 10
         self.n_vaccines = n_vaccines
         self.n_treatments = n_treatments
@@ -123,11 +117,9 @@ class Population:
         self.mild_efficacy=[0.6, 0.7, 0.8]
         self.critical_efficacy=[0.8, 0.75, 0.85]
         self.death_efficacy=[0.9, 0.95, 0.9]
-        #self.vaccination_rate = [0.7, 0.1, 0.1, 0.1]
-        self.vaccination_rate = [1, 0, 0, 0]
+        self.vaccination_rate = [0.7, 0.1, 0.1, 0.1]
         self.prevalence = 0.1
         self.historical_prevalence=0.1
-        self.NUMBEROFVACCINATED = 0
         
 
 
@@ -151,8 +143,7 @@ class Population:
         for t in range(n_individuals):
             person = Person(self)
             vaccine = np.random.choice(4, p=self.vaccination_rate) - 1
-            #vaccine = -1 # Everyone gets no vaccine
-            vaccine_array = np.zeros(self.n_vaccines) -1
+            vaccine_array = np.zeros(self.n_vaccines)
             
             if (vaccine>=0):
                 vaccine_array[vaccine] = 1
@@ -165,6 +156,7 @@ class Population:
 
     def vaccinate(self, person_index, vaccine_array):
         """ Give a vaccine to a specific person.
+
 
         Args:
         person_index (int array), indices of person in the population
@@ -224,7 +216,7 @@ class Population:
         result = np.zeros([X.shape[0], self.n_symptoms])
         for t in range(X.shape[0]):
             #print ("X:", result[t])
-            treatments[t][policy.get_action(X[t])] = 1
+            treatments[t] = policy.get_action(X[t].reshape(1,-1))
             r = np.array(np.matrix(treatments[t]) * self.A).flatten()
             for k in range(self.n_symptoms):
                 if (k <= 1):
