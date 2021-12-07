@@ -172,7 +172,7 @@ class Population:
         i = 0
         for t in person_index:
             self.persons[t].vaccinate(vaccine_array[i], self)
-            outcome[i] = self.persons[i].symptoms
+            outcome[i] = self.persons[t].symptoms
             i+=1
         return outcome
     
