@@ -1,5 +1,53 @@
 
 \section*{Fair Policies (Deadline 2: 19 November)}
+
+\subsubsection*{Sensitive varaibles}
+We do not want to discriminate with regards to gender, that is, we want our choice of action to be independent of this variable. 
+Income is another variable we could have considered, but to simplify, we will choose gender as our sensitive variable $z$. 
+
+
+\subsubsection*{Concepts of fairness}
+We will look at the concept of fairness as independence. 
+Our action $a$ is independent of a variable $z$ if $\mathbb{P}_{\mu}^{\pi}(a|z) = \mathbb{P}_{\mu}^{\pi}(a)$. 
+Furthermore, given a response $y$, we can either calibrate or balance the policy with respect to the sensitive variable.  
+We will choose the latter, such that the action $a$ is independent of $z$ given the true outcome $y$. 
+This is according to the definition of balance (4.3.2):
+\begin{align*}
+    \mathbb{P}_{\mu}^{\pi}(a|y,z) = \mathbb{P}_{\mu}^{\pi}(a|y) \quad \forall y,z\
+\end{align*}
+ 
+\subsubsection*{Measures of fairness}
+We need a metric to measure fairness. We will use
+\begin{align*}
+    F_{\text{balance}}(\mu, \pi) := \sum_{y,z,a}| \mathbb{P}_{\mu}^{\pi}(a|y,z) = \mathbb{P}_{\mu}^{\pi}(a|y)|^2
+\end{align*}
+To estimate $\mathbb{P}(a_i|y_j,z)$ and $\mathbb{P}(a_i|y_j)$ for $i \in \{\text{No vaccine, vaccine 1, vaccine 2, vaccine 3}\}$ and $j \in \{\text{Presence of critical symptom, Not presence of critical symptom}.\}$ we can use the rate we obtain after running the policy on a simulated population. 
+    
+\subsubsection*{Tuning a policy to be fair}
+Increasing the degree of fairness measured by the fairness-metric, may result in a loss in utility. 
+To balance utility and fariness we intriducte the value: 
+\begin{align*}
+    V(\lambda, \mu, \pi) = (1-\lambda)U(\mu, \pi) - \lambda F(\mu, \pi)
+\end{align*}
+where $\lambda$ is a parameter that needs to be tuned. 
+To find the optimal tradeoff, we can use stochastic gradient descent. 
+We have not managed to complete this task. 
+
+The optimization task above is unconstrained with respect to the amount of unfairness. 
+However, it might be the case that we can only allow a certain amount of fairness, say $\epsilon$. 
+The problem would then be 
+\begin{align*}
+    \text{max}_{\pi} U(\pi,\mu) \text{ s.t } F(\pi,\mu) < \epsilon
+\end{align*}
+
+
+
+\subsubsection*{Bias in the data collection}
+
+\subsubsection*{}
+\subsubsection*{}
+
+\subsection*{START OLD}
 \begin{itemize}
     \item \textcolor{blue}{Choose one concept of fairness, e.g. balance of decisions with respect to gender.}
     \begin{itemize}
@@ -88,3 +136,4 @@
             \end{itemize}
         \end{itemize}
 \end{itemize}
+\subsection*{FINISHED OLD}
