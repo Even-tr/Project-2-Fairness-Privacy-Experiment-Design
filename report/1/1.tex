@@ -2,6 +2,13 @@
 \section*{Privacy analysis (Deadline 1: 5 November)}
 \begin{itemize}
     \item \textcolor{blue}{Does the existence of this database raise any privacy concerns?}
+    The existence of this database raises some privacy concerns. With such a high number of genes (128), we get a total of $2^{128}$ possible combinations of genes. This would make it very unlikely for two people to have the same genes, and so it would be easy so single out people from this database if we know their genes. In other words, this database satisfies no more than 1-anonymity. 
+    
+    This might not be such a big problem if we consider the fact that the information of a persons genes is not common to have, but there have been a growing number of services where people exchange their genetic material for knowledge about their ancestry. These services could be hacked and then that information could get into a malicious adversary's hands. 
+    
+    From a differential privacy point of view, an adversary is assumed to have all available side information anyway. From this point of view, the database raises huge concerns. 
+    
+    One way of dealing with this is to reduce the information obtainable in the database by cutting down on the number of genes. If we suspect that only a few number of genes matter, then we can exclude the rest from the database. We can bucket together the income groups if we want to anonymize further. 
         \begin{itemize}
             \item What are som particularily sentitive variables, f.ex genes?
             \item The existence of the database does indeed raise privacy concerns. 
@@ -14,6 +21,7 @@
             \item Other points from brainstorming: Mention: 
         \end{itemize}
     \item \textcolor{blue}{If the database was secret, but your analysis public, how would that affect privacy?}
+        This is the model we are assuming in this project. Analysis of the data can still reveal enough information to identify individuals. A way of evading this issue is to use differential privacy mechanisms to add some noise to the statistics.
         \begin{itemize}
             \item This is actually the case. 
             \item Might be possible to identify individual from the summary statistics. 
@@ -23,6 +31,7 @@
             We then need to ensure than he cannot identify the individual that participate in the study. 
         \end{itemize}
     \item \textcolor{blue}{(a)}
+        As explained, we would have to include some differential privacy mechanism to product the data of the people in the training set. 
         \begin{itemize}
             \item \textcolor{blue}{Explain how you would protect the data of the people in the training set.}
                 \begin{itemize}
