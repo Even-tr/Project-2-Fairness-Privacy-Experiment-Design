@@ -28,18 +28,25 @@ In our case we use the Laplace mechanism to update a Beta distribution with a Be
 
 For the Laplace mechanism, we have that $\lambda = s/\epsilon$. In our case, we update by counting the number of person get critical symptoms from the vaccine. This is a counting query, and thus we can use results about general counting queries, namely that their sensitivity is 1. Thus for a counting query, we get that $\lambda = 1/\epsilon$, where $\epsilon$ is a parameter between bigger than zero that determines the degree of privacy. 
 
+In our approach we update the parameters for every person, and include Laplace noise every time. Another approach is to retrain using our original prior and accumulated data. In this case, we must consider the privacy of repeated queries to our database. With a total of $Q$ queries we get a total DP of
+\begin{align*}
+    \sum_{i=1}^Q\epsilon = Q\epsilon.
+\end{align*}
+To still achieve the same $\epsilon$-differentially privacy, we must use $\epsilon_Q = \epsilon/Q$. This is a trade off, as it would reduce the total noise at the end of our calculations, but would incure more noise at the beginning. 
+
 \subsection*{Protecting privacy for training and outcome}
 We are adaptive treatment allocation, via Thompson sampling, in this project. The training data and the data that obtains treatment is the same. The outcome of the vaccination of a single person is depended on the previous results from the vaccination. 
 As the decision to vaccinate is based purely on the data from the previous people, so the decision to vaccinate is independent of the current person. Thus private information of treated is not leaked at all through our method. 
+
+\subsection*{Exponential mechanism}
+ We also employ an exponential mechanism for our utility. This gives a policy which guarantees $\epsilon$-differential privacy. We implement this to show the differences it gives. It is given by
+            \begin{align*}
+                \pi(a|x) = \frac{ e^{\epsilon U(q,a,x)/s}}{\sum_{a'} e^{\epsilon U(q,a',x)/s}}
+            \end{align*}
+where $s$ is the sensitivity of the query. 
+
 \begin{itemize}
     \item \textcolor{blue}{Does the existence of this database raise any privacy concerns?}
-    The existence of this database raises some privacy concerns. With such a high number of genes (128), we get a total of $2^{128}$ possible combinations of genes. This would make it very unlikely for two people to have the same genes, and so it would be easy so single out people from this database if we know their genes. In other words, this database satisfies no more than 1-anonymity. 
-    
-    This might not be such a big problem if we consider the fact that the information of a persons genes is not common to have, but there have been a growing number of services where people exchange their genetic material for knowledge about their ancestry. These services could be hacked and then that information could get into a malicious adversary's hands. 
-    
-    From a differential privacy point of view, an adversary is assumed to have all available side information anyway. From this point of view, the database raises huge concerns. 
-    
-    One way of dealing with this is to reduce the information obtainable in the database by cutting down on the number of genes. If we suspect that only a few number of genes matter, then we can exclude the rest from the database. We can bucket together the income groups if we want to anonymize further. 
         \begin{itemize}
             \item What are som particularily sentitive variables, f.ex genes?
             \item The existence of the database does indeed raise privacy concerns. 
@@ -52,7 +59,6 @@ As the decision to vaccinate is based purely on the data from the previous peopl
             \item Other points from brainstorming: Mention: 
         \end{itemize}
     \item \textcolor{blue}{If the database was secret, but your analysis public, how would that affect privacy?}
-        This is the model we are assuming in this project. Analysis of the data can still reveal enough information to identify individuals. A way of evading this issue is to use differential privacy mechanisms to add some noise to the statistics.
         \begin{itemize}
             \item This is actually the case. 
             \item Might be possible to identify individual from the summary statistics. 
@@ -62,7 +68,6 @@ As the decision to vaccinate is based purely on the data from the previous peopl
             We then need to ensure than he cannot identify the individual that participate in the study. 
         \end{itemize}
     \item \textcolor{blue}{(a)}
-        As explained, we would have to include some differential privacy mechanism to product the data of the people in the training set. 
         \begin{itemize}
             \item \textcolor{blue}{Explain how you would protect the data of the people in the training set.}
                 \begin{itemize}
