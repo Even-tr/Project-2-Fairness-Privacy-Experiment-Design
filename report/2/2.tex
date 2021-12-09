@@ -43,10 +43,48 @@ The problem would then be
 
 
 \subsubsection*{Bias in the data collection}
+\textcolor{red}{TODO: describe bias in fairness}
+\verbatiminput{../src/outputs/gender_average_100_runs.txt}
 
-\subsubsection*{}
-\subsubsection*{}
+\begin{figure}
+    \includegraphics[width=0.6\textwidth]{../src/figures/age_per_gender.png} 
+    \includegraphics[width=0.5\textwidth]{../src/figures/age_per_gender_histogram_real.png} 
+    \caption{Comparason of distribution of age. Source: SSB 2021}
+    \label{Age_comparison}
+\end{figure}
 
+\begin{figure}
+    \includegraphics[width=0.6\textwidth]{../src/figures/income_histogram.png} 
+    \includegraphics[width=0.5\textwidth]{../src/figures/income_histogram_real.png} 
+    \caption{Comparason of distribution of income. Source: US Census Burea 2015}
+    \label{Income_comparison}
+\end{figure}
+
+
+
+\subsubsection*{Results}
+\verbatiminput{../src/outputs/default.txt}
+
+
+\begin{figure}
+    \includegraphics[width=0.6\textwidth]{../src/figures/fair_balance_symptom_0.png} 
+    \includegraphics[width=0.6\textwidth]{../src/figures/fair_balance_symptom_1.png} 
+    \caption{Frequency of action given outcome and sensitive variables}
+    \label{Fair_comp}
+\end{figure}
+
+\textcolor{red}{TODO: describe Figure \ref{Fair_comp}}
+
+\begin{figure}
+    \includegraphics[width=1\textwidth]{../src/figures/fair_F_simulation_histogram.png} 
+    \caption{Histogram of unfairness metric balance}
+    \label{F_histogram}
+\end{figure}
+
+\textcolor{red}{TODO: describe Figure \ref{F_histogram}}
+
+
+\newpage
 \subsection*{START OLD}
 \begin{itemize}
     \item \textcolor{blue}{Choose one concept of fairness, e.g. balance of decisions with respect to gender.}
@@ -136,4 +174,5 @@ The problem would then be
             \end{itemize}
         \end{itemize}
 \end{itemize}
+
 \subsection*{FINISHED OLD}
