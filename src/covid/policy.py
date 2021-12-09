@@ -129,11 +129,15 @@ class RandomPolicy(Policy):
 
         n_people = features.shape[0]
         ##print("Acting for ", n_people, "people");
-        actions = np.zeros([n_people, self.n_actions])
+        #actions = np.zeros([n_people, self.n_actions])
+        actions = np.zeros([n_people])
+        
         for t in range(features.shape[0]):
-            action = np.random.choice(self.action_set)
-            if (action >= 0):
-                actions[t,action] = 1
+            action = int(np.random.choice(self.action_set))
+            
+            actions[t]=action
+            #if (action >= 0):
+            #    actions[t,action] = 1
             
         return actions
 
