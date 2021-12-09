@@ -1,5 +1,36 @@
+\section*{Privacy analysis}
 
-\section*{Privacy analysis (Deadline 1: 5 November)}
+\subsection*{Database privacy concerns}
+The existence of this database raises some privacy concerns. With such a high number of genes (128), we get a total of $2^{128}$ possible combinations of genes. This would make it very unlikely for two people to have the same genes, and so it would be easy so single out people from this database if we know their genes. 
+    
+Important here is the discussion of $k$-anonymity. This is when any row in the database is indistinguishable from $k-1$ other rows with respect to a given set of identifiers. The identifiers are defined by the analyst. For a public database, the identifiers are essentially all the features. In our case, the number of options make it highly likely that the database satisfies no more than 1-anonymity. 
+    
+This might not be such a big problem if we consider the fact that the information of a persons genes is not common to have, but there have been a growing number of services where people exchange their genetic material for knowledge about their ancestry. These services could be hacked and then that information could get into a malicious adversary's hands. 
+    
+From a differential privacy point of view, an adversary is assumed to have all available side information anyway. From this point of view, the database raises huge concerns. 
+    
+One way of dealing with this is to reduce the information obtainable in the database by cutting down on the number of genes. If we suspect that only a few number of genes matter, then we can exclude the rest from the database. We can bucket together the income groups if we want to anonymize further. 
+
+\subsection*{Private data analysis}
+The model we are using in this project is that the database is secret, but that the analysis is public. This simplifies privacy concerns, as we do not have to guarantee $k$-anonymity. However, analysis of the data can still reveal enough information to identify individuals. A way of evading this issue is to use differential privacy mechanisms to add some noise to the statistics. 
+
+A stochastic algorithm $\pi : X \rightarrow A$ where the database $X$ is endowed with a neighbourhood relation $N$ is said to be $\epsilon$-differentially private if:
+\begin{align*}
+    \frac{\pi(a|x)}{\pi(a|x')} \leq e^\epsilon
+\end{align*}
+in all cases where $xNx'$. We typically define the neighbourhood relation so that two databases are neighbouring if they can be reached from each other by adding or removing a row. 
+    
+In our case we use the Laplace mechanism to update a Beta distribution with a Bernoulli prior in a Bayesian framework. We work in the \emph{centralised model}, which is the standard model in differential privacy. Here we add on Laplace noise $\omega \sim \operatorname{Laplace}(\lambda)$ where $\lambda$ is a parameter which depend on what query we are giving in order for the mechanism to be $\epsilon$-differential private and the \emph{sensitivity} of the query. The sensitivity $s$ of a query is given by 
+
+\begin{align*}
+    s := \max_{xNy} |f(x) - f(y)|.
+\end{align*}
+
+For the Laplace mechanism, we have that $\lambda = s/\epsilon$. In our case, we update by counting the number of person get critical symptoms from the vaccine. This is a counting query, and thus we can use results about general counting queries, namely that their sensitivity is 1. Thus for a counting query, we get that $\lambda = 1/\epsilon$, where $\epsilon$ is a parameter between bigger than zero that determines the degree of privacy. 
+
+\subsection*{Protecting privacy for training and outcome}
+We are adaptive treatment allocation, via Thompson sampling, in this project. The training data and the data that obtains treatment is the same. The outcome of the vaccination of a single person is depended on the previous results from the vaccination. 
+As the decision to vaccinate is based purely on the data from the previous people, so the decision to vaccinate is independent of the current person. Thus private information of treated is not leaked at all through our method. 
 \begin{itemize}
     \item \textcolor{blue}{Does the existence of this database raise any privacy concerns?}
     The existence of this database raises some privacy concerns. With such a high number of genes (128), we get a total of $2^{128}$ possible combinations of genes. This would make it very unlikely for two people to have the same genes, and so it would be easy so single out people from this database if we know their genes. In other words, this database satisfies no more than 1-anonymity. 
