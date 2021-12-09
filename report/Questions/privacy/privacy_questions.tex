@@ -29,50 +29,66 @@
 \date{\today}
 \begin{document}
 \maketitle
-\section{Our policy and model}
-We are uncertain in regards to whether we have chosen a good model, so here is a description of our model. 
 
-We have chosen the adaptive treatment allocation setup described in chapter 7. 
-That is, when treating $N$ patients with a vaccine, we want to reduce the symptoms experienced by the $N$ patients as much as possible. 
+\noindent \textcolor{red}{There is a lot of text, but I have stated to questions in red and tried to be specific}
+\subsubsection*{Two separate privacy questions}
+I interpret the privacy questions as two separate cases: One where you are asked to protect the identities of the people in the training set (just the storage of the data, without taking the experiment into account). It is this question we shall address when answering:
+\begin{itemize}
+    \item \textcolor{blue}{Does the existence of this database raise any privacy concerns?}
+    \item \textcolor{blue}{Explain how you would protect the data of the people in the training set.}
+\end{itemize}
+This we shall only describe, and not implement. 
+\\
+\\
+The second questions is how to can protect the people in the training set from being identified based on the published data in the report. This we shall address in the questions: 
+\begin{itemize}
+    \item \textcolor{blue}{If the database was secret, but your analysis public, how would that affect privacy?}
+    \item \textcolor{blue}{In particular, given that your policy and model are obtained from some 'training' data set, how would you guarantee that release or use, of the policy and model does not leak private information about the individual?}
+    \item \textcolor{blue}{Explain how you would protect the data of the people that obtained treatment?}
+    \item \textcolor{blue}{How would you then ensure that the private information of the treated individual is not leaked?}
+\end{itemize}
+\noindent \textcolor{red}{Q1: Have I somewhat understood the questions we shall answer?}
 
-We view each pair of action and symptom to be a bandit.
-F.ex the probability of fever when giving vaccine 2 is unknown to us. 
-We model this probability with a beta prior. 
-When estimating the probability $P(\text{fever}|\text{vaccine 2})$ we take the expectation of the beta distribution. 
+\subsubsection*{Implementation of privacy}
+Based on the two type of questions, I interpret the point 
+\begin{itemize}
+    \item \textcolor{blue}{Implement a private decision making mechanism for (b)}
+\end{itemize}
+as being asked to implement a privacy mechanism NOT to hide the individual in the database from being identifiable, but to make sure the individuals can not be identified based on our analysis, assuming the database to be secret in the first place.
+\\
+\noindent \textcolor{red}{Q2: Is this correct?}
 
-The drawback with this approach, we think, is that when patients number 100 comes in to get a vaccine, we base our decision not on the feature of that patient, but by the observed symptoms from the 99 earlier patients. 
 
-For our utility function we weigh each symptoms with its own negative constant, which can be viewed as a reward.
-F.ex when the symptoms are: Covid-Recovered, Covid-Positive, Taste, Fever, Headache, Pneumonia, Stomach, Myocarditis, Blood-Clots, Death, we can give it the rewards
+\subsubsection*{Privacy when using bandits}
+We have chosen to stick with the bandit model using Thompson sampling. 
+We have three bandits, one for each vaccine.
+Thus we disregard the features, but we will address this limitation. (We considered changing the bandits to model the probability of death given comorbidities, but we stuck to vaccines as we find this model simple and we understand it.)
+
+Here is my thoughts on how to use privacy using bandits: We add Laplace noise when updating the parameters for the bandits. 
+If we use a Local privacy model we would get
 \begin{align*}
-    \bold{r} = -(0, 0.2, 0.1, 0.1, 0.1, 0.5, 0.2, 0.5, 1.0, 100)
+    \theta_i \sim \text{Beta}(a_i, b_i) \quad i=1,2, 3
 \end{align*}
-with the utility being $U=\sum_{i=1}^{10} r_i$. 
-The expected utility is then $EU = \sum_{i=1}^{10} r_i P(r_i)$. 
+We choose the argmax and observe the reward $r_i$ (whether or not we get a critical symptom). When we update the parameters we add the noise $\omega \sim \text{Laplace}$. Or we could use a centralised privacy model we we batch the updates and add noise for each batch. 
 
-Our policy is the to maximise the expected utility. 
+\noindent \textcolor{red}{Q3: Is this a sufficient privacy mechanism? Or do we need to we also need to add noise to the observed symptom (response) when 'pulling' a bandit?}
+\noindent \textcolor{red}{Q4: And if we need to add noise to the symptom, can we use randomized response?}
 
-\section{\textcolor{red}{Questions}}
-\begin{enumerate}
-    \item Is this a good model? We still have some time before the postponed delivery, so we can change it it is desirable to base the action given to a patient on the features of the patient. 
-    \begin{itemize}
-        \item We have another suggestion for a model we are considering instead. 
-        The current setup consider 10 symptoms and 4 choices (0 vaccine, or vaccine 1-3). 
-        This makes 40 bandits. 
-        What if we instead only made three bandits like so: We consider only the three critical symptoms: Pneumonia, Myocarditis, Blood-Clots. 
-        We construct a single binary variable 1: 'presence of at least one critical symptom' and 0: 'not critical symptom'. 
-        We disregard the action of not giving a vaccine, so we have three actions, one for each vaccines. 
-        Thus our goal for vaccinating $N$ individuals are to maximize the number of given vaccines resulting in fewest critical symptoms. 
-    \end{itemize}
-    \item Using this model, does it make sense to use balance as a fairness criterion? 
-    It seems that using the bandits we are measuring the calibration $\mathbb{P}(y|a)$. 
-    Also, we can we talk about fairness with regards to gender if we don't use the features to decide on the action taken. A suggestion is in the next point. 
-    \item If we use balance as a fairness criterion and we want to measure the degree of fairness 
-    \begin{align*}
-        F_{\text{balance}}(\theta, \pi) \triangleq \sum_{y,z,a} |\mathbb{P}_{\theta}^{\pi} (a|y,z) - \mathbb{P}_{\theta}^{\pi}(a|y)|^2
-    \end{align*}  
-    Is it okay if after giving vaccines to $N$ people, we divide the individual into groups with similar vaccines and symptoms, and then look at the difference in the count of the two genders?
-    \item In your feedback on the point 'Bias in the collected data': 'How would you strategically find out if the given data might be biased?' Could you give us a push in the right direction for answering this point?
-    \item Could we get some input on how to approach the question 'How does the original training data affect the fairness of your policy?'.
-\end{enumerate}
+\subsubsection*{The exponential mechanism}
+We have considered trying the exponential mechanism, but we find it hard to grasp. 
+\\
+In Dirk's lecture he had an example where he used the exponential mechanism to change the frequencies of the values in a 'education'-column. 
+However, the definition in the book (3.4.6)
+\begin{align*}
+    \pi(a|x) := \frac{e^{\epsilon U(q,a,x) / \mathbb{L}(U(q))}}{e^{\sum_{a'}\epsilon U(q,a',x) / \mathbb{L}(U(q))}}
+\end{align*}
+defines the probability of a policy.
+
+When answering the question: 
+\begin{itemize}
+    \item \textcolor{blue}{Estimate the amount of loss in utility as you change the privacy guarantee}
+\end{itemize}
+my initial though was to add Laplace noise to the beta parameter updates, and then estimate the accumulated utility. This would probably be sub optimal and result in loss in utility.
+
+\noindent \textcolor{red}{Q5: If you think the exponential mechanism is a good idea, could you give us a hint on how we use it in the bandit setting?}
 \end{document}
