@@ -1,0 +1,49 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+
+\title{IN-STK5000 project 2}
+\author{torgeirlw }
+\date{December 2021}
+
+\begin{document}
+
+\maketitle
+
+\section{Thompson sampling}
+
+In our case we have a population we want to vaccinate in order to protect them from the Covid-19 virus, but we also dont want them to get any critical symptoms from the vaccines. We can only give one vaccine to each person in our population. If our population has size T, we can at the t-th person give them a vaccine $a_{t} \in \{0, 1, 2, 3\}$, where 0 is no vaccine, and 1, 2 and 3 are different vaccines. We then get a reward $r_{t} = -1$ if a person get a critical symptom, and $r_{t} = 0$ if they don't get a critical symptom from the vaccine. We then want to maximize the utility $U = \sum\limits_{t} r_{t} $, so we want to minimize the number of people that get a critical symptom from receiving a vaccine. We define critical symptoms as pneumonia, myocarditis and blood clots. 
+
+This kind of situation can be viewed as a bandit problem, where we have 4 different bandits, no vaccine or one of the tree vaccines, and each person plays one of the bandits (vaccines). For each person we get a reward, with expected value $\omega_{i} = E(r_{t} \mid a_{t} = i) $. We do not have any knowledge of the probability of getting critical symptoms from the vaccines before we begin to vaccinate our population.
+
+Since our rewards for each action is either 0 or -1, this can be  seen as coming from the Bernoulli distribution with an unknown probability, where each probability is coming from the beta distribution. We can define this as 
+
+    \[p(r_{t} \mid a_{t} = i) \sim Bernoulli(\omega_{i})\]
+    \[p(\omega_{i}) \sim Beta(a_{i}, b_{i})\]
+    
+The posterior distribution $\omega_{i}$ for our vaccines after giving out $n_{i}$ of each vaccine at time t can then be given by
+
+\[ \omega_{i,t} \mid r_{t} \sim Beta(a_{i} + \sum_{n} r_{i,t}, b_{i} + n_{i} - \sum_{n} r_{i,t})\]
+
+Since we have a prior belief of the probabilities $\omega_{i}$, we can then sample parameter values before we update our posterior, and then choose the optimal action. As we get more observations, we get more confident in the optimal action, and start to play this bandit more. This is what Thompson sampling is, as defined on page 162 in the book used in the course, and what we have used to define our policy.
+
+In our case we don't have any prior knowledge of the probability of getting critical symptoms from the vaccine, so we define our priors as uniform distribution.
+
+\[p(\omega_{i}) \sim Beta(1, 1)\]
+
+Our expected utility for each action then becomes 
+
+$$
+\operatorname{E}_{a_i} U = \sum_{y\in Y} \sum\limits_{t} r_{t}\cdot p(y|a_i) = \sum_{y\in Y} U \cdot p(y|a_i)
+$$
+
+where Y is a critical symptom. Our policy $\pi$ is then the action $a_{i}$ maximizing our expected utility.
+
+
+
+
+We illustrate the Thompson sampling algorithm with a simple example, where we have tree bandits with the probabilities of winning is [0.8, 0.75, 0.85], but unknown to our algorithm. Since we start with uniform priors we play each bandit randomly in the  beginning, but after some time we get more confident in our estimation of winning in each bandit, and in the end we  almost always play the bandit with the highest chance of winning. This is illustrated in our figures below.
+
+
+
+
+\end{document}
